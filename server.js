@@ -20,7 +20,7 @@ app.get("/health", (req, res) => {
 // ME (STRICT SPEC)
 app.get("/me", (req, res) => {
   return res.status(200).json({
-    name: "brownshalom",
+    name: "shalom david",
     email: "brown.shalom90@gmail.com",
     github: "https://github.com/brownshalom"
   });
