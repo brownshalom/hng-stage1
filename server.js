@@ -3,19 +3,6 @@ const app = express();
 
 app.use(express.json());
 
-// AUTH FIX (strict)
-const API_KEY = "hng_key_123";
-
-function auth(req, res, next) {
-  const key = req.headers["x-api-key"];
-
-  if (!key || key !== API_KEY) {
-    return res.status(401).json({ error: "Unauthorized" });
-  }
-
-  next();
-}
-
 // ROOT
 app.get("/", (req, res) => {
   return res.status(200).json({
@@ -23,22 +10,19 @@ app.get("/", (req, res) => {
   });
 });
 
-// HEALTH FIX (format + structure)
+// HEALTH (STRICT)
 app.get("/health", (req, res) => {
   return res.status(200).json({
-    status: "OK",
-    uptime: process.uptime(),
-    memory: process.memoryUsage().rss
+    message: "healthy"
   });
 });
 
-// ME FIX (auth + strict format)
-app.get("/me", auth, (req, res) => {
+// ME (STRICT SPEC)
+app.get("/me", (req, res) => {
   return res.status(200).json({
     name: "brownshalom",
     email: "brown.shalom90@gmail.com",
-    github_url: "https://github.com/brownshalom/hng-stage1",
-    repo_name: "hng-stage1"
+    github: "https://github.com/brownshalom"
   });
 });
 
