@@ -18,7 +18,7 @@ function auth(req, res, next) {
 
 // ROOT
 app.get("/", (req, res) => {
-  res.status(200).json({
+  return res.status(200).json({
     message: "API is running"
   });
 });
@@ -27,8 +27,8 @@ app.get("/", (req, res) => {
 app.get("/health", (req, res) => {
   return res.status(200).json({
     status: "OK",
-    cpu: "15%",
-    memory: "50MB"
+    uptime: process.uptime(),
+    memory: process.memoryUsage().rss
   });
 });
 
